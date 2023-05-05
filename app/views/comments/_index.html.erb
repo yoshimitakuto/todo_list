@@ -1,0 +1,16 @@
+<table class="col-md-8">
+  <% task.comments.each do |comment| %>
+    <tr>
+      <td>
+         <% if comment.user.id == current_user.id %>
+          <p style="text-align: right">
+           <%= comment.user.name %>:<%= comment.content %>
+           <%= link_to '削除', task_comment_path(comment.task, comment), method: :delete, remote: true, class: "btn btn-danger btn-sm" %>
+          </p>
+         <% else %>
+          <p style="text-align: left"><%= comment.user.name %>:<%= comment.content %></p>
+         <% end %>
+      </td>
+    </tr>
+   <% end %>
+</table>

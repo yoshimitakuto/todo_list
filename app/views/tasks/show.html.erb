@@ -1,0 +1,52 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-4">
+      <%= render 'form_new', task: @task_new %>
+    </div>
+    <div class="col-md-8">
+      <h1>詳細画面</h1>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th>ユーザー画像</th>
+              <th>Image</th>
+              <th>Title</th>
+              <th>Body</th>
+              <th colspan=5></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="task_<%= @task.id %>">
+              <td><%#= image_tag @task.user.get_profile_image(100, 100) %></td>
+              <td>
+               <% if @task.image.attached? %>
+                <%= image_tag @task.image, size: "100x100" %>
+               <% else %>
+                <%= image_tag 'no_image', size: "100x100" %>
+               <% end %>
+              </td>
+              <td><%= @task.title %></td>
+              <td><%= @task.body %></td>
+              <td class="comment_count"><%= @task.comments.count %>コメント</td>
+              <td><%= link_to '編集', edit_task_path(@task.id), class: 'btn btn-warning' %></td>
+              <td><%= link_to '一覧画面へ戻る', tasks_path, class: 'btn btn-info' %></td>
+              <td><%= link_to '削除', task_path(@task.id), method: :delete, class: 'btn btn-danger', "data-confirm" => "本当に削除しますか？" %></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="comment_table">
+          <%= render 'comments/index', task: @task %>
+        </div>
+
+        <div class="comment_form">
+           <%= render 'comments/comment', task: @task, comment: @comment %>
+        </div>
+
+
+        <p>投稿日：<%= @task.created_at.strftime('%Y/%m/%d') %></p>
+    </div>
+  </div>
+</div>
+
+
