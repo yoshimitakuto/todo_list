@@ -1,0 +1,14 @@
+= form_with model: task, url: tasks_path, method: :post do |task|
+  h1
+    | 新規投稿
+  .form-group
+
+  p
+    | 画像
+  = task.file_field :image, accept: "image/*"
+  .form-group
+    = task.text_field :title, placeholder: "題名を記載してください", class: 'form-control'
+  .form-group
+    = task.text_area :body, placeholder: "内容を記載してください",  class: 'form-control'
+  .task_submit
+    = task.submit '投稿', class: "btn btn-outline-info"

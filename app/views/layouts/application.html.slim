@@ -1,0 +1,59 @@
+doctype html
+html
+  head
+    title
+      | TodoList
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csrf_meta_tags
+    = csp_meta_tag
+    script[src="https://kit.fontawesome.com/bda6a2c1b1.js" crossorigin="anonymous"]
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    header
+      nav.navber.navbar-expand-lg.navbar-light.bg-dark
+        .container
+          .row
+            .col-md-3.mt-3.mb-3
+              = link_to about_path do
+                i.fa-solid.fa-clipboard-list.fa-2xl[style="color: #ffffff;"]
+            .ml-auto
+              ul.navbar-nav.mt-3
+                - if user_signed_in?
+                  li.nav-item.mr-2
+                    = link_to '/' do
+                      i.fa-solid.fa-house[style="color: #ffffff;"]
+                        | ホーム
+                  li.nav-item.mr-2
+                    = link_to users_path do
+                      i.fa-solid.fa-users[style="color: #ffffff;"]
+                        | ユーザー一覧
+                  li.nav-item.mr-2
+                    = link_to tasks_path do
+                      i.fa-solid.fa-list-check[style="color: #ffffff;"]
+                        | リスト一覧
+                  li.nav-item.mr-2
+                    = link_to destroy_user_session_path, method: :delete do
+                      i.fa-solid.fa-right-from-bracket[style="color: #ffffff;"]
+                        | ログアウト
+                - else
+                  li.nav-item.mr-2
+                    = link_to '/' do
+                      i.fa-solid.fa-house[style="color: #ffffff;"]
+                        | ホーム
+                  li.nav-item.mr-2
+                    = link_to new_user_registration_path do
+                      i.fa-solid.fa-user-plus[style="color: #ffffff;"]
+                        | 新規登録
+                  li.nav-item.mr-2
+                    = link_to new_user_session_path do
+                      i.fa-solid.fa-right-to-bracket[style="color: #ffffff;"]
+                        | ログイン
+                  li.nav-item.mr-2
+                    = link_to destroy_user_session_path, method: :delete do
+                      i.fa-solid.fa-right-from-bracket[style="color: #ffffff;"]
+                        | ログアウト
+    main
+      = flash[:notice]
+      = yield
+    footer

@@ -1,0 +1,8 @@
+.container.mt-3
+  .row
+    .col-md-4
+      = render 'error', obj: @task
+      = render 'users/edit'
+      = render 'form_new', task: @task
+    .col-md-8
+      = render 'index', tasks: @tasks

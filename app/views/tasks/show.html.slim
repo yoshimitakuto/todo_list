@@ -1,0 +1,50 @@
+.container.mt-3
+  .row
+    .col-md-4
+      = render 'form_new', task: @task_new
+    .col-md-8
+      h1
+        | 詳細画面
+      table.table
+        thead.thead-dark
+          tr
+            th
+              | ユーザー画像
+            th
+              | Image
+            th
+              | Title
+            th
+              | Body
+            th[colspan="5"]
+        tbody
+          |  <tr id="task_
+          = @task.id
+          | "> 
+          td
+            - #= image_tag @task.user.get_profile_image(100, 100)
+          td
+            - if @task.image.attached?
+              = image_tag @task.image, size: "100x100"
+            - else
+              = image_tag 'no_image', size: "100x100"
+          td
+            = @task.title
+          td
+            = @task.body
+          td.comment_count
+            = @task.comments.count
+            | コメント
+          td
+            = link_to '編集', edit_task_path(@task.id), class: 'btn btn-warning'
+          td
+            = link_to '一覧画面へ戻る', tasks_path, class: 'btn btn-info'
+          td
+            = link_to '削除', task_path(@task.id), method: :delete, class: 'btn btn-danger', "data-confirm" => "本当に削除しますか？"
+      .comment_table
+        = render 'comments/index', task: @task
+      .comment_form
+        = render 'comments/comment', task: @task, comment: @comment
+      p
+        | 投稿日：
+        = @task.created_at.strftime('%Y/%m/%d')

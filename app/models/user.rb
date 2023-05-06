@@ -8,6 +8,33 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  #follower_id : フォローしたユーザー
+  #followed_id : フォローされたユーザー
+
+  #フォローする側、される側の関係
+  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id",  dependent: :destroy
+  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+
+  #一覧表示のための実装
+  #ユーザーがフォローしている人（あるユーザーにフォローされたユーザー）全員をとってくる
+  has_many :followings, through: :relationships, source: :followed
+  #ユーザーをフォローしている人（あるユーザーをフォローしたユーザー）全員をとってくる
+  has_many :followers, through: :reverse_of_relationships, source: :follower
+
+  #relationshipsのメソッド
+  # フォローした時
+  def follow(user_id)
+    relationships.create(followed_id: user_id)
+  end
+  #フォローを外す時
+  def unfollow(user_id)
+    relationships.find_by(followed_id: user_id).destroy
+  end
+  #フォローしているか判定
+  def following?(user)
+    followings.include?(user)
+  end
+
   has_one_attached :profile_image
 
   validates :name, presence: true

@@ -1,0 +1,7 @@
+- if obj.errors.any?
+  = obj.errors.count
+  | 件のエラーが発生したため投稿できません。 
+  ul
+    - obj.errors.full_messages.each do |message|
+      li
+        = message

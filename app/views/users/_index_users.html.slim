@@ -1,0 +1,44 @@
+h1
+  | User List
+table.table
+  thead.thead-dark
+    tr
+      th
+        | Image
+      th
+        | Nmae
+      th
+        | Introduction
+      th
+        | follow:status
+      th
+        | follow
+      th
+        | follower
+  tbody
+    - users.each do |user|
+      tr
+
+      td
+        = image_tag user.get_profile_image(100,100)
+      td
+        = user.name
+      td
+        = user.introduction
+      td
+       -if current_user == user
+        = link_to '自分のアカウント', user_path(user.id)
+       - else
+         - if current_user.following?(user)
+          = link_to  user_relationships_path(user), method: :delete do
+           .far.fa-handshake
+         - else
+          = link_to 'フォローする', user_relationships_path(user), method: :post
+      td
+       = "フォロー数：#{user.followings.count}"
+      td
+        = "フォロワー数：#{user.followers.count}"
+      td
+        - if users == current_user
+          = link_to '編集', edit_user_path(user.id), class: 'btn btn-warning'
+= paginate users

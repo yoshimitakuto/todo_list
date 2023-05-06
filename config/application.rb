@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module TodoList
   class Application < Rails::Application
+    config.generators.template_engine = :slim
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 

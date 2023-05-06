@@ -1,0 +1,25 @@
+.container
+  .row
+    .col-md-4
+      = render 'error', obj: @task
+      = form_with model: @task, url: task_path(@task.id), method: :patch do |f|
+        h1
+          | 編集画面
+        .form-group
+
+        p
+          | 画像
+        = f.file_field :image, accept: "image/*"
+    .form-group
+      p
+        = f.label :title
+      = f.text_field :title, class: 'form-control'
+    .form-group
+      p
+        = f.label :body
+      = f.text_area :body, class: 'form-control'
+    .task_submit.mb-2
+      = f.submit '更新', class: 'btn btn-success'
+    = link_to 'Back', tasks_path
+    |  / 
+    = link_to '詳細画面', task_path(@task)

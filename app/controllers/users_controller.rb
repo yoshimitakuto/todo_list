@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   # before_action :correct_user, onyl:[:edit, :update]
 
   def index
-    @users = User.page(params[:page])
+    @users = User.all.page(params[:page])
     @task = Task.new
   end
 
