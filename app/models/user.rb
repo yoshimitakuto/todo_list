@@ -35,6 +35,10 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[name] # 検索可能な属性を設定する
+  end
+
   has_one_attached :profile_image
 
   validates :name, presence: true

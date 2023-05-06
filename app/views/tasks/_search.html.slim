@@ -2,8 +2,9 @@
   h3 Search
 
   = search_form_for q, url: search_tasks_path do |f|
-   = f.label :title_cont, 'タイトル検索'
    = f.search_field :title_cont, placeholder: 'title検索'
    = f.search_field :body_cont, placeholder: 'body検索'
    = f.search_field :body_or_title_cont, placeholder: 'キーワード検索'
+   = f.search_field :user_name_cont, placeholder: 'ユーザーネーム検索'
+   = f.search_field :comments_content_cont, placeholder: 'コメント内容検索'
    = f.submit '検索'

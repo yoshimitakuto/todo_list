@@ -12,7 +12,7 @@ class Task < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    %w[user favorite comment] # 関連モデルの検索を許可する場合は、配列に追加する
+    %w[user favorites comments] # 関連モデルの検索を許可する場合は、配列に追加する
   end
 
 

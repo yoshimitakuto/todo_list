@@ -19,7 +19,7 @@ table.table
     - tasks.each do |task|
       |  <tr id="tasks_
       = task.id
-      | "> 
+      | ">
       td
         = link_to task_path(task.id) do
           - if task.image.attached?
@@ -27,6 +27,8 @@ table.table
           - else
             = image_tag 'no_image', size: "100x100"
       td
+        = task.user.name
+      /td
         - #= image_tag tasks.user.get_profile_image(100,100)
       td
         = link_to task.title, task_path(task.id)
