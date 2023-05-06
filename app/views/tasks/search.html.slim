@@ -1,0 +1,48 @@
+h1
+ | 検索結果
+
+table.table
+  thead.thead-dark
+    tr
+      th
+        | Image
+      th
+        | プロフィール画像
+      th
+        | Title
+      th
+        | Body
+      th
+      th
+      th
+      th
+  tbody
+    - @results.each do |task|
+      |  <tr id="tasks_
+      = task.id
+      | ">
+      td
+        = link_to task_path(task.id) do
+          - if task.image.attached?
+            = image_tag task.get_image(100,100)
+          - else
+            = image_tag 'no_image', size: "100x100"
+      td
+        - #= image_tag tasks.user.get_profile_image(100,100)
+      td
+        = link_to task.title, task_path(task.id)
+      td
+        = task.body
+      td.favorite
+        = render 'favorites/favorite', task: task
+      td
+        = task.comments.count
+        | コメント
+      td
+        - if task.user == current_user
+          = link_to '編集', edit_task_path(task.id), class: 'btn btn-warning'
+      td
+        - if task.user == current_user
+          = link_to '削除', task_path(task.id), method: :delete, class: 'btn btn-danger', "data-confirm" => "本当に削除しますか？"
+
+= link_to '一覧画面へ戻る', tasks_path

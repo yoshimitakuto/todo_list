@@ -7,6 +7,14 @@ class Task < ApplicationRecord
   validates :title, presence: true, length: {maximum:30}
   validates :body, presence: true, length: {maximum:100}
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[title body created_at] # 検索可能な属性を設定する
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[user favorite comment] # 関連モデルの検索を許可する場合は、配列に追加する
+  end
+
 
   def get_image(width, height)
     unless image.attached?

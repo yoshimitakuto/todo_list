@@ -1,7 +1,14 @@
 class TasksController < ApplicationController
   before_action :params_find, only: [:show, :edit, :update]
+  # before_action :set_q, only: [:index, :search]
+
+  def search
+    @q = Task.ransack(params[:q])
+    @results = @q.result
+  end
 
   def index
+    @q = Task.ransack(params[:q])
     @tasks = Task.all.page(params[:page]).order(created_at: :desc)
     @task = Task.new
   end
@@ -44,6 +51,10 @@ class TasksController < ApplicationController
   end
 
   private
+
+  # def set_q
+  #   @q = Task.ransack(params[:q])
+  # end
 
   def task_params
     params.require(:task).permit(:title, :body, :image)
