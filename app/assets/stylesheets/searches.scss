@@ -1,3 +1,36 @@
 // Place all the styles related to the searches controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+$title_color: red;
+$beath_color: lightgray;
+
+h3 {
+  color: $title_color;
+}
+
+.search_container {
+  position: relative;
+  .keyword_submit {
+  // font-family: FontAwesome;
+   position: absolute;
+   top: 70px;
+   left: 43%;
+   cursor: pointer;
+   border: none;
+   border-radius: 20%;
+   background: #3879D9;
+   color: #fff;
+   outline : none;
+   height: 2.0em;
+  }
+}
+
+#q_body_or_title_or_user_name_or_comments_content_cont {
+  background-color: $beath_color;
+  border-radius: 20px;
+  margin: 10px;
+  padding: 3px 10px;
+  width: 50%;
+  border: 1px solid #999;
+}
