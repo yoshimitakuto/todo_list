@@ -44,6 +44,9 @@ group :development do
   gem 'spring'
   gem 'html2slim'
   gem 'slim-rails'
+  gem 'rubocop', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
 end
 
 group :test do

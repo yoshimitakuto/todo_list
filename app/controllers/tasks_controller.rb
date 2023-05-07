@@ -16,14 +16,14 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @task.user_id = current_user.id
-    if @task.save
-      flash[:notice] = "投稿が成功しました"
-      redirect_to tasks_path
-    else
-      flash[:notice] = "投稿に失敗しました"
-      @tasks = Task.page(params[:page])
-      render :index
-    end
+   if @task.save
+     flash[:notice] = "投稿が成功しました"
+     redirect_to tasks_path
+   else
+     flash[:notice] = "投稿に失敗しました"
+     @tasks = Task.page(params[:page])
+     render :index
+   end
   end
 
   def show
